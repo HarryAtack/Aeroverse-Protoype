@@ -1,0 +1,65 @@
+{
+  "expo": {
+    "name": "AeroVerse",
+    "slug": "aeroverse",
+    "scheme": "aeroverse",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#05080F",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.aeroverse.prototype",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "AeroVerse uses your photo library so you can upload aircraft photographs for identification.",
+        "NSCameraUsageDescription": "AeroVerse uses the camera so you can photograph aircraft.",
+        "NSLocationWhenInUseUsageDescription": "Optional: AeroVerse can show aircraft and spotting locations near you. Your precise location is never shared with other users."
+      }
+    },
+    "android": {
+      "package": "app.aeroverse.prototype",
+      "adaptiveIcon": {
+        "backgroundColor": "#05080F",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "output": "single",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-image",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#05080F"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "AeroVerse uses your photo library so you can upload aircraft photographs for identification.",
+          "cameraPermission": "AeroVerse uses the camera so you can photograph aircraft."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Optional: AeroVerse can show aircraft and spotting locations near you. Your precise location is never shared with other users."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}
