@@ -19,7 +19,9 @@ const SLIDES = [
 ] as const;
 
 export default function Welcome() {
-  const { width, height } = useWindowDimensions();
+  const win = useWindowDimensions();
+  const [size, setSize] = useState({ width: win.width, height: win.height });
+  const { width, height } = size;
   const insets = useSafeAreaInsets();
   const [i, setI] = useState(0);
   const ref = useRef<FlatList>(null);
@@ -31,8 +33,9 @@ export default function Welcome() {
   const next = () => (i < SLIDES.length - 1 ? ref.current?.scrollToIndex({ index: i + 1 }) : finish());
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.bg }}>
+    <View style={{ flex: 1, backgroundColor: colors.bg }} onLayout={(e) => setSize({ width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height })}>
       <Animated.FlatList
+        key={Math.round(width)}
         ref={ref as never}
         data={SLIDES as unknown as (typeof SLIDES)[number][]}
         horizontal
