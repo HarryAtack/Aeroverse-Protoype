@@ -30,7 +30,11 @@ export default function Welcome() {
     useApp.getState().setIntroSeen();
     router.replace('/auth/sign-in');
   };
-  const next = () => (i < SLIDES.length - 1 ? ref.current?.scrollToIndex({ index: i + 1 }) : finish());
+  const next = () => {
+    if (i >= SLIDES.length - 1) return finish();
+    ref.current?.scrollToIndex({ index: i + 1 });
+    setI(i + 1);
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }} onLayout={(e) => setSize({ width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height })}>
@@ -48,7 +52,7 @@ export default function Welcome() {
         renderItem={({ item, index }) => {
           const scale = x.interpolate({ inputRange: [(index - 1) * width, index * width, (index + 1) * width], outputRange: [1.15, 1, 1.15], extrapolate: 'clamp' });
           return (
-            <View style={{ width, height }}>
+            <View style={{ width, height, overflow: 'hidden' }}>
               <Animated.View style={[StyleSheet.absoluteFill, { transform: [{ scale }] }]}>
                 <Photo id={item.photo} style={StyleSheet.absoluteFill} credit="compact" />
               </Animated.View>
